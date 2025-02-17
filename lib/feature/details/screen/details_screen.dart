@@ -5,6 +5,7 @@ import 'package:news/core/widgets/custom_button_widget.dart';
 import 'package:news/feature/details/screen/widgets/details_details_section.dart';
 import 'package:news/feature/details/screen/widgets/details_image_section.dart';
 import 'package:news/feature/details/screen/widgets/details_title_section.dart';
+import 'package:share_plus_dialog/share_plus_dialog.dart';
 
 class DetailsScreen extends StatelessWidget {
   dynamic title;
@@ -56,11 +57,9 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 customButton(
                   onTap: () async {
-                    FlutterClipboard.copy(details).then((value) =>
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Center(child: Text('تم نسخ الخبر')),
-                        )));
+                    ShareDialog.share(context, body: '${title}\n${image}', platforms:  SharePlatform.defaults);
+
+
                   },
                   text: 'مشاركه الخبر',
                   iconBtton: Icon(

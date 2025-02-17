@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/feature/home/manager/home_manager_cubit.dart';
@@ -20,12 +21,15 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Directionality(
           textDirection: TextDirection.rtl,
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              children: [Expanded(child: NewsList())],
-            ),
-          ),
+          child: ConditionalBuilder(condition: state is! GetNewsLoadingState,
+              builder:(context) => SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [Expanded(child: NewsList())],
+                ),
+              ) ,
+              fallback: (context) => Center(child: CircularProgressIndicator()),
+          )
         ),
       );
     });

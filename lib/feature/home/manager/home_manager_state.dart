@@ -5,3 +5,4 @@ sealed class HomeManagerState {}
 
 final class HomeManagerInitial extends HomeManagerState {}
 final class GetNewsSuccessState extends HomeManagerState {}
+final class GetNewsLoadingState extends HomeManagerState {}

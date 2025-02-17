@@ -10,9 +10,10 @@ class HomeManagerCubit extends Cubit<HomeManagerState> {
   List newsList = [];
 
   Future getDataFromDatabase() async {
-    final supabaseClient = Supabase.instance.client;
+    emit(GetNewsLoadingState());
+    final supabaseClient =await Supabase.instance.client;
 
-    supabaseClient.from('news').select().then((value) {
+   await supabaseClient.from('news').select().then((value) {
       newsList = value.where((item) => item['active'] == true).toList();
     });
     emit(GetNewsSuccessState());
